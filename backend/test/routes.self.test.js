@@ -2,21 +2,11 @@
 import { expect } from 'chai'
 import request from 'supertest'
 import app from '../app.js'
+import { getAuthAdmin, adminCredentials } from './setup-users.js'
 
-const adminCredentials = {
-  username: 'admin', 
-  password: 'admin'
-}
-
-var admin = request.agent(app);
-before((done) => {
-  admin
-    .post('/api/auth/login')
-    .send(adminCredentials)
-    .end((err, response) => {
-      expect(response.statusCode).to.equal(200)
-      done()
-    })
+var admin
+beforeEach(async ()=> {
+	admin = await getAuthAdmin() 
 })
 
 describe('routes : self', () => {

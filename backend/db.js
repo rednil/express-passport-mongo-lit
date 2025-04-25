@@ -31,10 +31,10 @@ async function ensureAdmin(){
 	const username = process.env.ADMIN_USERNAME
   const password = process.env.ADMIN_PASSWORD
 	if(await db.collection('users').findOne({ username })) return
-	await createUser(username, password, 'ADMIN')
+	await createUser({username, password, role: 'ADMIN'})
 }
 
-async function createUser(username, password, role){
+async function createUser({username, password, role}){
 	const db = await getDb()
   password = hashSync(password, genSaltSync())
 	return db.collection('users').insertOne({

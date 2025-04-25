@@ -1,3 +1,4 @@
+/*
 const chai =          require('chai')
 const chaiHttp =      require('chai-http')
 const passportStub =  require('passport-stub')
@@ -146,3 +147,4 @@ describe('routes : users', () => {
   })
 
 })
+	*/

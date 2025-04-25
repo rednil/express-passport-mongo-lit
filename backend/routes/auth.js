@@ -3,14 +3,13 @@ const router = express.Router()
 import { createUser, loginRequired } from '../helpers/auth.js'
 import passport from '../auth/local.js'
 
-router.post('/register', (req, res, next)  => {
-  return createUser(req, res)
-  .then((response) => {
-    return login(req, res, next)
-  })
-  .catch((err) => {
+router.post('/register', async (req, res, next)  => {
+	try{
+		await createUser(req, res)
+		return login(req, res, next)
+	} catch(err) {
     errorResponse(res, 400, (typeof err == 'string') ? err : 'REGISTRATION_FAILED', err.stack)
-  })
+  }
 })
 
 function login(req, res, next){

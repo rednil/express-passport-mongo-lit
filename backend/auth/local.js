@@ -19,7 +19,6 @@ passport.deserializeUser(async (_id, done) => {
 passport.use(new LocalStrategy(options, async (username, password, done) => {
   // check to see if the username exists
 	const db = await getDb()
-	console.log('trying to find', username, password)
 	const user = await db.collection('users').findOne({username})
 	
   if (user && compareSync(password, user.password)) return done(null, user)
