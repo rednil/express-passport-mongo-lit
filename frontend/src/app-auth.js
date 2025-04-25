@@ -33,6 +33,11 @@ export class AppAuth extends LitElement {
 			.errormsg {
 				background-color: red;
 			}
+			select, input {
+				border: 0;
+				border-radius: 5px;
+				box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 24px 0px;
+			}
     `
   }
 

@@ -1,30 +1,38 @@
-const chai =          require('chai')
-const chaiHttp =      require('chai-http')
-const passportStub =  require('passport-stub')
-const server =        require('../app')
-const helpers =       require("../helpers/test")
 
-const should = chai.should()
-chai.use(chaiHttp)
-passportStub.install(server)
+import { expect } from 'chai'
+import request from 'supertest'
+import app from '../app.js'
+
+const adminCredentials = {
+  username: 'admin', 
+  password: 'admin'
+}
+
+var admin = request.agent(app);
+before((done) => {
+  admin
+    .post('/api/auth/login')
+    .send(adminCredentials)
+    .end((err, response) => {
+      expect(response.statusCode).to.equal(200)
+      done()
+    })
+})
 
 describe('routes : self', () => {
-
-  beforeEach(helpers.beforeEach)
-  afterEach(helpers.afterEach)
- 
   describe('GET /self', () => {
-    it('should return the correct username', async () => {
-      passportStub.login(helpers.userCredentials)
-      const res = await chai.request(server).get('/api/self')
-      helpers.shouldSucceed(res)
-      res.body.username.should.eql(helpers.userCredentials.username)
-      passportStub.logout()
-    })
-    it('should throw an error if a user is not logged in', async () => {
-      const res = await chai.request(server).get('/api/self')
-      helpers.should401(res)
+    it(
+			'should return the correct username',
+			() => admin.get('/api/self')
+			.expect(200)
+			.then(({body}) =>
+				expect(body.username).to.equal(adminCredentials.username)
+			)
+    )
+    it('should throw an error if a user is not logged in', done => {
+      request(app).get('/api/self')
+      .expect(401, done)
     })
   })
-  
 })
+

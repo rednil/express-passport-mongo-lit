@@ -51,6 +51,7 @@ export class AppUsers extends LitElement {
 				padding-right: 1em;
 				flex-direction: column;
 				width: 10em;
+				
       }
       .role {
         font-size: smaller;
@@ -58,6 +59,12 @@ export class AppUsers extends LitElement {
       }
 			.actions button {
 				margin: auto 0.5em;
+			}
+			button {
+				border: 0;
+				padding: 0.5em;
+				border-radius: 5px;
+				box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 24px 0px;
 			}
     `
   }

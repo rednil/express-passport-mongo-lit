@@ -4,37 +4,30 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "test": "mocha",
-    "test:watch": "mocha --watch",
-    "initdb:dev": "rm ./db/dev.better-sqlite3; knex migrate:latest --env development; knex seed:run --specific=create_users.js --env development",
-    "initdb:prod": "knex migrate:latest --env production; knex seed:run --specific=create_admin.js --env production",
-    "serve:prod": "npm run initdb:prod; ./bin/www",
-    "migrate:test": "knex migrate:latest --env test",
-    "browse": "sqlitebrowser ./db/dev.better-sqlite3 -t users",
-    "seed": "knex seed:run"
+    "start": "dotenvx run -f .env.dev -- nodemon ./bin/www",
+    "test": "dotenvx run -f .env.test -- mocha --file ./test/setup-users.js",
+    "test:watch": "npm test -- --watch",
+    "serve:prod": "./bin/www",
+    "browse": "mongodb-compass"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "better-sqlite3": "^11.9.1",
     "connect-mongodb-session": "^5.0.0",
-    "connect-session-knex": "^5.0.0",
     "debug": "~4.4.0",
     "express": "~5.1.0",
     "express-session": "^1.18.1",
     "http-errors": "~2.0.0",
-    "jade": "~1.11.0",
-    "knex": "^3.1.0",
     "mongodb": "^6.16.0",
     "morgan": "~1.10.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+		"@dotenvx/dotenvx": "^1.41.0",
     "chai": "^5.2.0",
     "chai-http": "^5.1.1",
     "mocha": "^11.1.0",
     "nodemon": "^3.1.9",
-    "passport-stub": "^1.1.1"
+    "supertest": "^7.1.0"
   }
 }

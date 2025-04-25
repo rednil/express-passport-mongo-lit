@@ -33,8 +33,9 @@ export class AppDialog extends LitElement {
 			}
 			.window {
 				margin: auto;
-				background-color: lightgray;
+				background-color: #ededed;
 				border-radius: 10px;
+				box-shadow: rgba(0, 0, 0, 0.4) 0px 10px 10px;
 			}
 			.content {
 				padding: 1em;	
@@ -44,8 +45,14 @@ export class AppDialog extends LitElement {
 				padding-top: 1em;
 				justify-content: space-between;
 			}
+			button, select, input {
+				border: 0;
+				padding: 0.5em;
+				border-radius: 5px;
+				box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 24px 0px;
+			}
 			.title {
-				background-color: grey;
+				background-color: lightgrey;
 				padding: 0.5em;
 				text-align: center;
 				border-radius: 10px 10px 0 0;

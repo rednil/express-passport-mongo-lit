@@ -60,6 +60,7 @@ export class AppShell extends LitElement {
 				position: fixed;
 				left: -10em;
 				transition: left 0.3s ease-in-out;
+				box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 24px 0px;
 			}
       .logged-out button, .logged-out select {
         display: none;
@@ -68,10 +69,10 @@ export class AppShell extends LitElement {
 				display: flex;
 				flex-direction: row;
 				justify-content: space-between;
+				box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 24px 0px;
 			}
 			main {
 				display: flex;
-				background-color: green;
 				flex: 1;
 				padding: 1em;
 			}

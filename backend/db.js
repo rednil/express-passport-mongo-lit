@@ -1,5 +1,8 @@
 import { MongoClient } from 'mongodb'
 import { genSaltSync, hashSync } from 'bcrypt'
+
+console.log('DATABASE_NAME', process.env.DATABASE_NAME)
+const databaseName = process.env.DATABASE_NAME
 const uri = "mongodb://admin:admin@localhost:27017"
 const client = new MongoClient(uri)
 var db
@@ -15,7 +18,7 @@ async function getDb() {
   if(db) return db
 	try {
     await client.connect()
-		db = client.db('upupa')
+		db = client.db(databaseName)
 		await ensureAdmin()
 		return db
   } catch (error) {
@@ -25,18 +28,21 @@ async function getDb() {
 }
 
 async function ensureAdmin(){
-	const admin = await db.collection('users').findOne({ role: 'ADMIN' })
-	if(admin) return
-	const username = process.env.ADMIN_USERNAME || 'admin'
-  const password = process.env.ADMIN_PASSWORD || 'admin'
-  const salt = genSaltSync();
-  const hash = hashSync(password, salt);
-	const result = await db.collection('users').insertOne({
+	const username = process.env.ADMIN_USERNAME
+  const password = process.env.ADMIN_PASSWORD
+	if(await db.collection('users').findOne({ username })) return
+	await createUser(username, password, 'ADMIN')
+}
+
+async function createUser(username, password, role){
+	const db = await getDb()
+  password = hashSync(password, genSaltSync())
+	return db.collection('users').insertOne({
 		username,
-		password: hash,
-		role: 'ADMIN', 
-    createdAt: new Date().getTime()
+		password,
+		role, 
+    createdAt: new Date()
 	})
 }
 
-export { getDb, client, uri }
+export { getDb, client, uri, databaseName, createUser }

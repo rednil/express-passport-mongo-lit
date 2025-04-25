@@ -6,7 +6,6 @@ import { getDb } from '../db.js'
 const options = {}
 
 passport.serializeUser((user, done) => {
-	console.log('serializeUser', user)
   done(null, user._id)
 })
 

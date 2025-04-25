@@ -1,8 +1,8 @@
+const environment = process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+
 import express from 'express'
-//import { MongoClient } from "mongodb"
 import createHttpError from 'http-errors'
-//import path from 'path'
-import { uri } from './db.js'
+import { uri, databaseName } from './db.js'
 import morgan from 'morgan'
 import session from 'express-session'
 import passport from 'passport'
@@ -16,23 +16,11 @@ import { attachDb } from './middleware/attachDb.js'
 const MongoDBStore = ConnectMongoDBSession(session)
 const store = new MongoDBStore({
   uri,
-	databaseName: 'upupa',
+	databaseName,
   collection: 'sessions'
 })
-/*
-var usersRouter =   require('./routes/users')
-var authRouter =    require('./routes/auth')
-*/
-const environment = process.env.NODE_ENV = process.env.NODE_ENV || 'development'
-//console.log('NODE_ENV', process.env.NODE_ENV)
 
 var app = express()
-
-/*
-// view engine setup
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'jade')
-*/
 
 if(environment != 'test') app.use(morgan('dev'))
 app.use(express.json())
@@ -40,7 +28,6 @@ app.use(express.urlencoded({ extended: false }))
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename)
-console.log(__filename, __dirname)
 app.use(express.static(path.join(__dirname, 'public')))
 
 
