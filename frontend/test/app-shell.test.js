@@ -10,7 +10,7 @@ describe('AppShell', () => {
   });
 
   it('renders mwc-drawer', () => {
-    const drawer = element.shadowRoot.querySelector('mwc-drawer')
+    const drawer = element.shadowRoot.querySelector('app-menu')
     expect(drawer).to.exist;
   })
   
