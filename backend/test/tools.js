@@ -1,4 +1,4 @@
-import { getDb, createUser } from "../db.js"
+import { getDb, createUser, client } from "../db.js"
 import request from 'supertest'
 import app from '../app.js'
 
@@ -23,6 +23,11 @@ export async function getAuthAgent(credentials){
 	return user
 }
 
+after(async () => {
+	console.log('disconnecting DB')
+	await client.close()
+	process.exit()
+})
 export async function getAuthAdmin(){
 	return await getAuthAgent(adminCredentials)
 }
