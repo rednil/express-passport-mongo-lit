@@ -1,7 +1,7 @@
 {
-  "name": "express-passport-knex-lit",
+  "name": "express-passport-mongo-lit",
   "version": "0.0.1",
-  "description": "A fullstack starter for little projects requiring authentication and user management. Based on express, passport, knex and lit, automatically packed into a docker container using a github action.",
+  "description": "A fullstack starter for little projects requiring authentication and user management. Based on express, passport, mongo and lit, automatically packed into a docker container using a github action.",
   "main": "index.js",
   "scripts": {
     "test": "npm run test:frontend; npm run test:backend",
@@ -10,14 +10,14 @@
     "build": "cd frontend; npm run build",
     "start": "cd frontend; npm start & cd ../backend; npm start",
     "init": "cd backend; npm run initdb:dev",
-    "docker:build": "cp -a frontend/dist backend/public; docker build backend --tag express-passport-knex-lit --file Dockerfile",
-    "docker:serve-local": "docker run -it -p 8080:80 express-passport-knex-lit; xdg-open http://localhost:8080",
-    "docker:serve-repo": "docker run -it -p 8080:80 ghcr.io/rednil/express-passport-knex-lit:latest; xdg-open http://localhost:8080",
+    "docker:build": "cp -a frontend/dist backend/public; docker build backend --tag express-passport-mongo-lit --file Dockerfile",
+    "docker:serve-local": "docker run -it -p 8080:80 express-passport-mongo-lit; xdg-open http://localhost:8080",
+    "docker:serve-repo": "docker run -it -p 8080:80 ghcr.io/rednil/express-passport-mongo-lit:latest; xdg-open http://localhost:8080",
     "cleaninstall": "cd frontend; npm ci && cd ../backend; npm ci"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rednil/express-passport-knex-lit.git"
+    "url": "git+https://github.com/rednil/express-passport-mongo-lit.git"
   },
   "keywords": [
     "express",
