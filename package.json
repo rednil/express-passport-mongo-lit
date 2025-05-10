@@ -9,7 +9,6 @@
     "test:backend": "cd backend; npm run test",
     "build": "cd frontend; npm run build",
     "start": "cd frontend; npm start & cd ../backend; npm start",
-    "init": "cd backend; npm run initdb:dev",
     "docker:build": "cp -a frontend/dist backend/public; docker build backend --tag express-passport-mongo-lit --file Dockerfile",
     "docker:serve-local": "docker run -it -p 8080:80 express-passport-mongo-lit; xdg-open http://localhost:8080",
     "docker:serve-repo": "docker run -it -p 8080:80 ghcr.io/rednil/express-passport-mongo-lit:latest; xdg-open http://localhost:8080",
@@ -29,7 +28,7 @@
   "author": "rednil",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rednil/express-lit-docker/issues"
+    "url": "https://github.com/rednil/express-passport-mongo-lit/issues"
   },
-  "homepage": "https://github.com/rednil/express-lit-docker#readme"
+  "homepage": "https://github.com/rednil/express-passport-mongo-lit#readme"
 }

@@ -26,7 +26,7 @@ router.get('/:id', loginRequired, async (req, res, next) => {
 	if(role != 'ADMIN' && _id != req.params.id) return res.status(403).json({error: 'UNAUTHORIZED'})
 	const user = await req.db
 	.collection('users')
-	.findOne({ _id: new ObjectId(req.params.id) })
+	.findOne(idQuery(req))
   if(user) res.json(user)
 	else res.status(404).json({error: 'ID_UNKNOWN'})
 })
