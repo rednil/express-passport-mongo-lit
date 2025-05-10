@@ -1,18 +1,22 @@
-# express-passport-knex-lit
+# express-passport-mongo-lit
 
-A fullstack starter for little projects requiring authentication and user management. Based on [express](https://expressjs.com), [passport](https://www.passportjs.org/), [knex](https://knexjs.org/) and [lit](https://lit.dev/), automatically packed into a [docker](https://www.docker.com/) container using a [github action](https://github.com/features/actions).  
+A fullstack starter for little projects requiring authentication and user management. Based on [express](https://expressjs.com), [passport](https://www.passportjs.org/), [mongodb](https://mongodb.com/) and [lit](https://lit.dev/), automatically packed into a [docker](https://www.docker.com/) container using a [github action](https://github.com/features/actions).  
 
 The frontend was generated using [npm init @open-wc](https://github.com/open-wc/create).
 
 The backend was generated using [npx express-generator](https://github.com/expressjs/generator).
 
-During the docker build, the frontend build is copied from frontend/dist to backend/public, from where express serves static files. The backend is then wrapped up into the official lts-slim node image from [dockerhub](https://hub.docker.com/_/node). Knex is configured to use [better-sqlite3](https://github.com/WiseLibs/better-sqlite3) in [knexfile.js](https://github.com/rednil/express-passport-knex-lit/blob/main/backend/knexfile.js). If used in a docker container, the following environmental parameters are available:
+During the docker build, the frontend build is copied from frontend/dist to backend/public, from where express serves static files. The backend is then wrapped up into the official lts-slim node image from [dockerhub](https://hub.docker.com/_/node). If used in a docker container, the following environmental parameters are available:
 
 * ADMIN_USERNAME (only changed **if no admin exists in the database yet**, defaults to "admin")
 * ADMIN_PASSWORD (only changed **if no admin exists in the database yet**, defaults to "admin")
 * SESSION_SECRET (Using a secret that cannot be guessed will reduce the ability to hijack a session, see [here](http://expressjs.com/en/resources/middleware/session.html))
 
 For development, use the following commands in the top level folder
+```
+docker compose up -d
+```
+This will run a mongodb container your backend can interact with.
 ```
 npm run cleaninstall
 ```
