@@ -28,7 +28,8 @@ export async function createUser(req) {
   })
 	return {
 		username,
-		id: result.insertedId
+		_id: result.insertedId,
+		role
 	}
 }
 

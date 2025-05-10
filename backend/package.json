@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "dotenvx run -f .env.dev -- nodemon ./bin/www",
-    "test": "dotenvx run -f .env.test -- mocha --file ./test/setup-users.js",
-    "test:watch": "npm test -- --watch",
+    "test": "dotenvx run -f .env.test -- mocha",
+    "test:watch": "nodemon --watch \"*/*.js\" --exec \"npm test\"",
     "serve:prod": "./bin/www",
     "browse": "mongodb-compass"
   },

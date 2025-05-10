@@ -2,18 +2,20 @@
 import { expect } from 'chai'
 import request from 'supertest'
 import app from '../app.js'
-import { getAuthAdmin, adminCredentials } from './setup-users.js'
+import { setupUsers, adminCredentials } from './tools.js'
 
-var admin
-beforeEach(async ()=> {
-	admin = await getAuthAdmin() 
-})
+
+var auth
+
 
 describe('routes : self', () => {
+	beforeEach(async ()=> {
+		auth = await setupUsers()
+	})
   describe('GET /self', () => {
     it(
 			'should return the correct username',
-			() => admin.get('/api/self')
+			() => auth.admin.get('/api/self')
 			.expect(200)
 			.then(({body}) =>
 				expect(body.username).to.equal(adminCredentials.username)

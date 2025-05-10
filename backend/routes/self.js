@@ -1,5 +1,5 @@
 import express from 'express'
-import { loginRequired } from '../helpers/auth.js'
+import { loginRequired } from '../auth/tools.js'
 const router = express.Router()
 
 /* GET your own user account. */

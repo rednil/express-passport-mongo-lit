@@ -1,6 +1,6 @@
 import express from 'express'
 const router = express.Router()
-import { createUser, loginRequired } from '../helpers/auth.js'
+import { createUser, loginRequired } from '../auth/tools.js'
 import passport from '../auth/local.js'
 
 router.post('/register', async (req, res, next)  => {

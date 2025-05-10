@@ -24,17 +24,19 @@ export async function getAuthAgent(credentials){
 }
 
 export async function getAuthAdmin(){
-	return getAuthAgent(adminCredentials)
+	return await getAuthAgent(adminCredentials)
 }
 
 export async function getAuthUser(){
 	return getAuthAgent(userCredentials)
 }
 
-beforeEach(async () => {
+export async function setupUsers() {
 	const db = await getDb()
 	await db.collection('users').drop()
-	await createUser(adminCredentials)
-	await createUser(userCredentials)
-})
-
+	const adminId = (await createUser(adminCredentials)).insertedId.toString()
+	const userId = (await createUser(userCredentials)).insertedId.toString()
+	const admin = await getAuthAgent(adminCredentials)
+	const user = await getAuthAgent(userCredentials)
+	return { user, admin, adminId, userId }
+}
